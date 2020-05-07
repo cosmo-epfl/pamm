@@ -275,7 +275,7 @@
             CALL xyz_read(5,natoms,header,labels,positions,endf)
             IF(endf<0) EXIT ! time to go!
            
-            IF (ALLOCATED(masktypes).and.SIZE(masktypes)/=natoms) DEALLOCATE(masktypes)
+            IF (ALLOCATED(masktypes)) DEALLOCATE(masktypes)
             IF (.not. ALLOCATED(masktypes)) THEN ! first step, must allocate stuff
                ! inizialize the mask types
                ALLOCATE(masktypes(natoms))
@@ -369,7 +369,6 @@
                      x(1)=rdh-rah ! calculation of nu
                      ! Calculate the distance donor-acceptor (R)
                      CALL pbcdist(cell,icell,positions(:,id),positions(:,ia),x(3))
-   
                      wfactor=1.0d0
                      IF(weighted) wfactor=1.0d0/((x(2)-x(1))*(x(2)+x(1))*x(3))
    
@@ -390,7 +389,7 @@
                         ! Pre-PAMM mode : write out x=[nu,mu,r] and the associated wfactor
                         WRITE(*,"(3(A1,ES21.8E4))",ADVANCE = "NO")  " ",x(1)," ",x(2)," ",x(3)
                         IF (weighted) WRITE(*,"(A1,ES21.8E4)",ADVANCE = "NO") " ", wfactor
-                        write(*,*) "" ! go to a new line
+                        WRITE(*,*) "" ! go to a new line
                      ENDIF
                   ENDDO
                ENDDO
