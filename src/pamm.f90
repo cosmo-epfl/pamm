@@ -355,7 +355,7 @@
               ENDDO
               ! write out the number of the
               ! cluster with the highest probability
-              WRITE(*,*) px,DLOG(pcluster(dummyi1)),dummyi1
+              WRITE(*,*) px,DLOG(pcluster),dummyi1
             ENDDO
             DEALLOCATE(clusters)
          ENDIF
